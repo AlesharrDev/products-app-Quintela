@@ -1,0 +1,7 @@
+{
+  "name": "productos-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
