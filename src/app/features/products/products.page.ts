@@ -38,6 +38,7 @@ import { Product } from 'src/app/core/models/product.model';
 import { ProductService } from 'src/app/core/services/product.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { NavbarComponent } from "src/app/shared/components/navbar/navbar.component";
+import { FloatingActionButtonComponent } from "src/app/shared/components/floating-action-button/floating-action-button.component";
 
 
 @Component({
@@ -61,9 +62,10 @@ import { NavbarComponent } from "src/app/shared/components/navbar/navbar.compone
     IonCard,
     IonCardContent,
     IonChip,
-    IonFab,
-    IonFabButton,
-    NavbarComponent
+    // IonFab,
+    // IonFabButton,
+    NavbarComponent,
+    FloatingActionButtonComponent
 ],
 })
 export class ProductsPage implements OnInit {

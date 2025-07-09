@@ -1,0 +1,17 @@
+ion-fab {
+  ion-fab-button {
+    --background: var(--ion-color-secondary);
+    --color: var(--ion-color-secondary-contrast);
+    --border-radius: 50%;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+    &:hover {
+      --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+    }
+    
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+} 
