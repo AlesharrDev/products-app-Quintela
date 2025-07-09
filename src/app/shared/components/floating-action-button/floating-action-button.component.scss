@@ -1,4 +1,9 @@
 ion-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  
   ion-fab-button {
     --background: var(--ion-color-secondary);
     --color: var(--ion-color-secondary-contrast);
