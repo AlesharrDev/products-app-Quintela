@@ -1,0 +1,16 @@
+<app-navbar>Productos</app-navbar>
+<ion-content [fullscreen]="true" class="custom-content">
+  <div class="container">
+
+    <ion-item class="input-con-borde" fill="outline">
+      <ion-input type="text" placeholder="Buscar producto"></ion-input>
+      <ion-icon slot="end" name="search-outline"></ion-icon>
+    </ion-item>
+    
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="navigatetoProductForm($event)">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+</ion-content>

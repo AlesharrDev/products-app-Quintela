@@ -1,0 +1,29 @@
+:host {
+  --background-color-light: #e6e6e6;
+  --background-color-dark: #1a2833;
+  --backgournd-color-dark2:#3c5b72;
+  --logoAltAnch:44px;
+  --color-blanco:#ffffff;
+
+  ion-toolbar {
+    --background: var(--background-color-light);
+    --color: #000;
+  }
+
+  @media (prefers-color-scheme: dark) {
+
+    ion-toolbar {
+      --background: var(--background-color-dark);
+      --color: #fff;
+    }
+    
+  }
+}
+.logo{
+  height: var(--logoAltAnch);
+  width: var(--logoAltAnch);
+  margin-left: 10px;
+}
+.logout-label{
+  margin-left: 10px;
+}

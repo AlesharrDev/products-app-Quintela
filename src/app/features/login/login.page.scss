@@ -1,0 +1,124 @@
+:host {
+  --background-color-light: #e6e6e6;
+  --background-color-dark: #1a2833;
+  --backgournd-color-dark2:#3c5b72;
+  --logoAltAnch:240px;
+  --color-white:#ffffff;
+  --color-dark:#000000;
+  ion-content.login-content {
+    --background: var(--background-color-light);
+  }
+  ion-item {
+    --background: var(--background-color-light);
+    --border-color: transparent;
+  }
+  .themedtext{
+    color: var(--color-dark);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    ion-item{
+      --background: var(--background-color-dark2);
+      --border-color: transparent;
+      
+    }
+    .themedtext{
+      color: var(--color-dar);
+    }
+
+    ion-content.login-content {
+      --background: var(--background-color-dark);
+    }
+    
+  }
+}
+// .login-content {
+//   --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+// }
+
+.logo{
+  height: var(--logoAltAnch);
+  width: var(--logoAltAnch);
+  margin-right: 10px;
+}
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+
+  .logo-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+  }
+
+  p {
+    font-size: 16px;
+    opacity: 0.8;
+    margin: 0;
+  }
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 30px;
+
+  .input-item {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 10px;
+  box-sizing: border-box;
+  height: 75px;
+  display: flex;
+  }
+// *{
+//   border: 1px solid black;
+// }
+
+  .login-button {
+    --border-radius: 12px;
+    height: 50px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+}
+
+.demo-info {
+  width: 100%;
+  max-width: 400px;
+
+  ion-card {
+    --background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+
+    ion-card-content {
+      text-align: center;
+
+      h3 {
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      p {
+        color: #666;
+        margin: 5px 0;
+      }
+    }
+  }
+}
