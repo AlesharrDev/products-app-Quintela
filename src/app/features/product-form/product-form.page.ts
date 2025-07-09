@@ -73,13 +73,15 @@ export class ProductFormPage implements OnInit {
   }
 
   ngOnInit() {
-    this.categories = this.productService.getCategories()
     this.productId = this.route.snapshot.paramMap.get("id")
 
     if (this.productId) {
       this.isEditing = true
       this.loadProduct()
     }
+  }
+  ionViewWillEnter() {
+    this.categories = this.productService.getCategories()
   }
 
   loadProduct() {

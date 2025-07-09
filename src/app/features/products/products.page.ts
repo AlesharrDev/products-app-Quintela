@@ -37,6 +37,7 @@ import {
 import { Product } from 'src/app/core/models/product.model';
 import { ProductService } from 'src/app/core/services/product.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { NavbarComponent } from "src/app/shared/components/navbar/navbar.component";
 
 
 @Component({
@@ -51,8 +52,6 @@ import { AuthService } from 'src/app/core/services/auth.service';
     IonToolbar,
     IonTitle,
     IonContent,
-    IonButtons,
-    IonButton,
     IonIcon,
     IonSearchbar,
     IonItem,
@@ -64,7 +63,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
     IonChip,
     IonFab,
     IonFabButton,
-  ],
+    NavbarComponent
+],
 })
 export class ProductsPage implements OnInit {
   private productService = inject(ProductService);

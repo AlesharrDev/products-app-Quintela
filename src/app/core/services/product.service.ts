@@ -82,10 +82,9 @@ export class ProductService {
     const products = this.productsSubject.value.filter((p) => p.id !== id)
     this.saveProducts(products)
   }
-
+  
   getCategories(): string[] {
-    const products = this.productsSubject.value
-    const categories = [...new Set(products.map((p) => p.category))]
-    return categories.length > 0 ? categories : ["Electrónicos", "Computadoras", "Ropa", "Hogar"]
-  }
+      const categories = ["Electrónicos", "Computadoras", "Ropa", "Hogar","Otros"]
+      return categories;
+    } 
 }
