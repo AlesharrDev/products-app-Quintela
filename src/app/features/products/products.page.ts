@@ -138,7 +138,7 @@ export class ProductsPage implements OnInit {
   }
 
   addProduct() {
-    this.router.navigate(['/product-form']);
+    this.router.navigate(['/product-form']);                                //quiter el foco del boton despues del click
   }
 
   async presentProductOptions(product: Product) {
@@ -178,12 +178,11 @@ export class ProductsPage implements OnInit {
   }
 
   viewProduct(product: Product) {
-    // Implementar vista de detalles si es necesario
-    console.log('Ver producto:', product);
+    console.log('Ver producto:', product);                            // Implementar vista de detalles si es necesario
   }
 
   editProduct(product: Product) {
-    this.router.navigate(['/product-form', product.id]);
+    this.router.navigate(['/product-form', product.id]);              //implementar la edicion de producto
   }
 
   async confirmDelete(product: Product) {

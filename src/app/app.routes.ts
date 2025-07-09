@@ -28,4 +28,12 @@ export const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'product-form/:id',
+    loadComponent: () =>
+      import('./features/product-form/product-form.page').then(
+        (m) => m.ProductFormPage
+      ),
+    canActivate: [AuthGuard],
+  },
 ];
