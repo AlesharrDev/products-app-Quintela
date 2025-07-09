@@ -34,7 +34,12 @@
 
   <!-- Lista de productos -->
   <div class="products-container">
-    <ion-card *ngFor="let product of filteredProducts" class="product-card" (click)="presentProductOptions(product)">
+    <!-- card de productos -->
+     <app-product-card 
+       [productslist]="filteredProducts"
+       (productClick)="presentProductOptions($event)">
+     </app-product-card>
+    <!-- <ion-card *ngFor="let product of filteredProducts" class="product-card" (click)="presentProductOptions(product)">
       <div class="product-image-container" *ngIf="product.image">
         <img [src]="product.image"/>
       </div>
@@ -45,8 +50,8 @@
           <ion-label>{{product.category}}</ion-label>
         </ion-chip>
       </ion-card-content>
-    </ion-card>
-
+    </ion-card> -->
+    
     <!-- Mensaje cuando no hay productos -->
     <div *ngIf="filteredProducts.length === 0" class="empty-state">
       <ion-icon name="cube-outline" class="empty-icon"></ion-icon>

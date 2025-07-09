@@ -1,0 +1,14 @@
+<ion-card *ngFor="let product of productslist" class="product-card" 
+(click)="presentProductOptions(product)"
+>
+  <div class="product-image-container" *ngIf="product.image">
+    <img [src]="product.image"/>
+  </div>
+  <ion-card-content>
+    <h2>{{product.name}}</h2>
+    <p class="product-description">{{product.description}}</p>
+    <ion-chip color="primary" class="category-chip">
+      <ion-label>{{product.category}}</ion-label>
+    </ion-chip>
+  </ion-card-content>
+</ion-card>
