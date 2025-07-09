@@ -17,11 +17,10 @@ import { addOutline } from 'ionicons/icons';
   ]
 })
 export class FloatingActionButtonComponent {
-  @Input() icon: string = 'add-outline';
   @Input() color: string = 'secondary';
   @Input() vertical: 'top' | 'bottom' = 'bottom';
   @Input() horizontal: 'start' | 'center' | 'end' = 'end';
-  @Input() label?: string;
+
   
   @Output() buttonClick = new EventEmitter<void>();
 
