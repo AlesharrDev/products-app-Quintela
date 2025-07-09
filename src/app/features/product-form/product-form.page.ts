@@ -1,20 +1,167 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonButtons, IonBackButton } from '@ionic/angular/standalone';
+import { Component, type OnInit, inject } from "@angular/core"
+import { CommonModule } from "@angular/common"
+import { FormsModule } from "@angular/forms"
+import { ActivatedRoute, Router } from "@angular/router"
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonButtons,
+  IonBackButton,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonTextarea,
+  IonSelect,
+  IonSelectOption,
+  IonButton,
+  IonIcon,
+  ToastController,
+  ActionSheetController,
+} from "@ionic/angular/standalone"
+import { addIcons } from "ionicons"
+import { cameraOutline } from "ionicons/icons"
+import { ProductService } from "src/app/core/services/product.service"
+import { Product } from "src/app/core/models/product.model"
+
 
 @Component({
-  selector: 'app-product-form',
-  templateUrl: './product-form.page.html',
-  styleUrls: ['./product-form.page.scss'],
+  selector: "app-product-form",
+  templateUrl: "./product-form.page.html",
+  styleUrls: ["./product-form.page.scss"],
   standalone: true,
-  imports: [IonBackButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonButtons,
+    IonBackButton,
+    IonItem,
+    IonLabel,
+    IonInput,
+    IonTextarea,
+    IonSelect,
+    IonSelectOption,
+    IonButton,
+    IonIcon,
+  ],
 })
 export class ProductFormPage implements OnInit {
+  private route = inject(ActivatedRoute)
+  private router = inject(Router)
+  private productService = inject(ProductService)
+  private toastController = inject(ToastController)
+  private actionSheetController = inject(ActionSheetController)
 
-  constructor() { }
-
-  ngOnInit() {
+  product: Partial<Product> = {
+    name: "",
+    description: "",
+    category: "",
+    image: "",
   }
 
+  isEditing = false
+  productId: string | null = null
+  categories: string[] = []
+
+  constructor() {
+    addIcons({ cameraOutline })
+  }
+
+  ngOnInit() {
+    this.categories = this.productService.getCategories()
+    this.productId = this.route.snapshot.paramMap.get("id")
+
+    if (this.productId) {
+      this.isEditing = true
+      this.loadProduct()
+    }
+  }
+
+  loadProduct() {
+    if (this.productId) {
+      const existingProduct = this.productService.getProduct(this.productId)
+      if (existingProduct) {
+        this.product = { ...existingProduct }
+      }
+    }
+  }
+
+  async onSubmit() {
+    if (!this.isFormValid()) {
+      this.showToast("Por favor, complete todos los campos requeridos", "warning")
+      return
+    }
+
+    try {
+      if (this.isEditing && this.productId) {
+        this.productService.updateProduct(this.productId, this.product)
+        this.showToast("Producto actualizado exitosamente", "success")
+      } else {
+        this.productService.addProduct(this.product as Omit<Product, "id" | "createdAt" | "updatedAt">)
+        this.showToast("Producto creado exitosamente", "success")
+      }
+
+      this.router.navigate(["/products"])
+    } catch (error) {
+      this.showToast("Error al guardar el producto", "danger")
+    }
+  }
+
+  isFormValid(): boolean {
+    return !!(this.product.name && this.product.description && this.product.category)
+  }
+
+  async selectImage() {
+    const actionSheet = await this.actionSheetController.create({
+      header: "Seleccionar imagen",
+      buttons: [
+        {
+          text: "Imagen de ejemplo 1",
+          handler: () => {
+            this.product.image = "/placeholder.svg?height=200&width=200&text=Producto+1"
+          },
+        },
+        {
+          text: "Imagen de ejemplo 2",
+          handler: () => {
+            this.product.image = "/placeholder.svg?height=200&width=200&text=Producto+2"
+          },
+        },
+        {
+          text: "Imagen de ejemplo 3",
+          handler: () => {
+            this.product.image = "/placeholder.svg?height=200&width=200&text=Producto+3"
+          },
+        },
+        {
+          text: "Sin imagen",
+          handler: () => {
+            this.product.image = ""
+          },
+        },
+        {
+          text: "Cancelar",
+          role: "cancel",
+        },
+      ],
+    })
+    await actionSheet.present()
+  }
+
+  private async showToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 3000,
+      color,
+      position: "top",
+    })
+    toast.present()
+  }
 }
+
+export default ProductFormPage

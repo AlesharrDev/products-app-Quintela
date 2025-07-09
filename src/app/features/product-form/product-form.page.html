@@ -1,16 +1,84 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/products" text="Volver" color="primary"></ion-back-button>
+      <ion-back-button defaultHref="/products"></ion-back-button>
     </ion-buttons>
-    <ion-title>Agregar nuevo Producto</ion-title>
+    <ion-title>{{isEditing ? 'Editar Producto' : 'Nuevo Producto'}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">product-form</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <form class="product-form" (ngSubmit)="onSubmit()">
+    <!-- Imagen del producto -->
+    <div class="image-section">
+      <div class="image-container" (click)="selectImage()">
+        <img 
+          *ngIf="product.image" 
+          [src]="product.image" 
+          [alt]="product.name || 'Producto'"
+          class="product-image" />
+        <div *ngIf="!product.image" class="image-placeholder">
+          <ion-icon name="camera-outline"></ion-icon>
+          <p>Toca para seleccionar imagen</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="form-content">
+      <ion-item class="form-item">
+        <ion-label position="stacked">Nombre *</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="product.name"
+          name="name"
+          placeholder="Ingrese el nombre del producto"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="form-item">
+        <ion-label position="stacked">Descripción *</ion-label>
+        <ion-textarea
+          [(ngModel)]="product.description"
+          name="description"
+          placeholder="Ingrese la descripción del producto"
+          rows="4"
+          required>
+        </ion-textarea>
+      </ion-item>
+
+      <ion-item class="form-item">
+        <ion-label position="stacked">Categoría *</ion-label>
+        <ion-select
+          [(ngModel)]="product.category"
+          name="category"
+          placeholder="Seleccione una categoría"
+          required>
+          <ion-select-option *ngFor="let category of categories" [value]="category">
+            {{category}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Botones -->
+      <div class="button-section">
+        <ion-button
+          expand="block"
+          type="submit"
+          [disabled]="!isFormValid()"
+          color="primary">
+          {{isEditing ? 'Actualizar Producto' : 'Crear Producto'}}
+        </ion-button>
+
+        <ion-button
+          expand="block"
+          fill="outline"
+          color="medium"
+          routerLink="/products">
+          Cancelar
+        </ion-button>
+      </div>
+    </div>
+  </form>
 </ion-content>

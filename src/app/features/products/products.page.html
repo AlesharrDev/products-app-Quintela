@@ -1,16 +1,71 @@
-<app-navbar>Productos</app-navbar>
-<ion-content [fullscreen]="true" class="custom-content">
-  <div class="container">
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Productos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-    <ion-item class="input-con-borde" fill="outline">
-      <ion-input type="text" placeholder="Buscar producto"></ion-input>
-      <ion-icon slot="end" name="search-outline"></ion-icon>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Productos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Barra de búsqueda y filtros -->
+  <div class="search-section">
+    <ion-searchbar
+      [(ngModel)]="searchTerm"
+      (ionInput)="onSearchChange($event)"
+      placeholder="Buscar productos..."
+      show-clear-button="focus">
+    </ion-searchbar>
+
+    <ion-item>
+      <ion-label>Categoría:</ion-label>
+      <ion-select
+        [(ngModel)]="selectedCategory"
+        (ionChange)="onCategoryChange($event)"
+        placeholder="Todas">
+        <ion-select-option value="all">Todas las categorías</ion-select-option>
+        <ion-select-option *ngFor="let category of categories" [value]="category">
+          {{category}}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
-    
   </div>
+
+  <!-- Lista de productos -->
+  <div class="products-container">
+    <ion-card *ngFor="let product of filteredProducts" class="product-card" (click)="presentProductOptions(product)">
+      <div class="product-image-container">
+        <img [src]="product.image || '/placeholder.svg?height=150&width=150'" [alt]="product.name" />
+      </div>
+      <ion-card-content>
+        <h2>{{product.name}}</h2>
+        <p class="product-description">{{product.description}}</p>
+        <ion-chip color="primary" class="category-chip">
+          <ion-label>{{product.category}}</ion-label>
+        </ion-chip>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Mensaje cuando no hay productos -->
+    <div *ngIf="filteredProducts.length === 0" class="empty-state">
+      <ion-icon name="cube-outline" class="empty-icon"></ion-icon>
+      <h3>No se encontraron productos</h3>
+      <p>{{searchTerm ? 'Intenta con otros términos de búsqueda' : 'Agrega tu primer producto'}}</p>
+    </div>
+  </div>
+
+  <!-- Botón flotante para agregar producto -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button (click)="navigatetoProductForm($event)">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
+    <ion-fab-button (click)="addProduct()" color="secondary">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

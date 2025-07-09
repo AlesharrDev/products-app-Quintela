@@ -1,37 +1,81 @@
-:host {
-  --background-color-light: #e6e6e6;
-  --background-color-dark: #1a2833;
-  --backgournd-color-dark2:#3c5b72;
-  --color-blanco:#ffffff;
+.product-form {
+  height: 100%;
+}
 
-  ion-item {
-    --background: var(--color-blanco);
-    --border-color: transparent;
-  }
-  ion-content.custom-content {
-    --background: var(--background-color-light);
-  }
-  .container{
-    background-color: var(--color-blanco);
-    padding: 20px 10px;
-    border-radius: 10px;
-    margin: 10px 10px;
-  }
-  @media (prefers-color-scheme: dark) {
-    ion-item{
-      --background: var(--background-color-dark2);
-      --border-color: transparent;
-      
+.image-section {
+  padding: 20px;
+  text-align: center;
+  background: var(--ion-color-light);
+
+  .image-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:active {
+      transform: scale(0.95);
     }
-    .container{
-    background-color: var(--backgournd-color-dark2);
-    padding: 20px 10px;
-    border-radius: 10px; 
-    margin: 10px 10px;
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
-    ion-content.custom-content {
-      --background: var(--background-color-dark);
+
+    .image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border: 2px dashed var(--ion-color-medium);
+      color: var(--ion-color-medium);
+
+      ion-icon {
+        font-size: 48px;
+        margin-bottom: 10px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 14px;
+      }
     }
-    
+  }
+}
+
+.form-content {
+  padding: 20px;
+
+  .form-item {
+    margin-bottom: 20px;
+    --border-radius: 12px;
+
+    ion-label {
+      font-weight: 500;
+      color: var(--ion-color-dark);
+    }
+
+    ion-input, ion-textarea, ion-select {
+      --background: var(--ion-color-light);
+      --border-radius: 8px;
+    }
+  }
+
+  .button-section {
+    margin-top: 30px;
+
+    ion-button {
+      --border-radius: 12px;
+      height: 50px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
   }
 }
