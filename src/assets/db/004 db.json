@@ -1,0 +1,53 @@
+{
+    "database": "products-list.db",
+    "version": 1,
+    "encrypted": false,
+    "mode": "full",
+    "tables": [
+        {
+            "name": "items",
+            "schema": [
+                {
+                    "column": "id",
+                    "value": "INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "description",
+                    "value": "TEXT NOT NULL"
+                },
+                {
+                    "column": "nombre",
+                    "value": "TEXT NOT NULL"
+                },
+                {
+                    "column": "categoria",
+                    "value": "TEXT NOT NULL"
+                },
+                {
+                    "column": "imagen",
+                    "value": "TEXT NOT NULL"
+                }
+            ],
+            "values": []
+        },
+        {
+            "name": "settings",
+            "schema": [
+                {
+                    "column": "key",
+                    "value": "TEXT NOT NULL PRIMARY KEY"
+                },
+                {
+                    "column": "value",
+                    "value": "TEXT NOT NULL"
+                }
+            ],
+            "values": [
+                [
+                    "THEME",
+                    "light"
+                ]
+            ]
+        }
+    ]
+}
