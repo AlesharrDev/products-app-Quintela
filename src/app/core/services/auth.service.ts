@@ -24,7 +24,6 @@ export class AuthService {
 
   login(username: string, password: string): Promise<boolean> {
     return new Promise((resolve) => {
-      setTimeout(() => {
         if (username === this.VALID_CREDENTIALS.username && password === this.VALID_CREDENTIALS.password) {
           localStorage.setItem("isLoggedIn", "true")
           localStorage.setItem("currentUser", username)
@@ -33,7 +32,6 @@ export class AuthService {
         } else {
           resolve(false)
         }
-      }, 1000) // Simular delay de red
     })
   }
 

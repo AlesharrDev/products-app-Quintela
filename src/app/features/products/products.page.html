@@ -1,5 +1,5 @@
 <app-navbar>
-  producto
+  Productos
 </app-navbar>
 
 <ion-content [fullscreen]="true">
@@ -35,8 +35,8 @@
   <!-- Lista de productos -->
   <div class="products-container">
     <ion-card *ngFor="let product of filteredProducts" class="product-card" (click)="presentProductOptions(product)">
-      <div class="product-image-container">
-        <img [src]="product.image || '/placeholder.svg?height=150&width=150'" [alt]="product.name" />
+      <div class="product-image-container" *ngIf="product.image">
+        <img [src]="product.image"/>
       </div>
       <ion-card-content>
         <h2>{{product.name}}</h2>

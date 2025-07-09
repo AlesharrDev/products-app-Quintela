@@ -20,30 +20,31 @@ export class ProductService {
     if (stored) {
       const products = JSON.parse(stored)
       this.productsSubject.next(products)
-    } else {
-      // Productos de ejemplo
-      const sampleProducts: Product[] = [
-        {
-          id: "1",
-          name: "iPhone 15",
-          description: "Último modelo de iPhone con tecnología avanzada",
-          category: "Electrónicos",
-          image: "/placeholder.svg?height=200&width=200",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          id: "2",
-          name: "MacBook Pro",
-          description: "Laptop profesional para desarrollo y diseño",
-          category: "Computadoras",
-          image: "/placeholder.svg?height=200&width=200",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ]
-      this.saveProducts(sampleProducts)
-    }
+    } 
+    // else {
+    //   // Productos de ejemplo
+    //   const sampleProducts: Product[] = [
+    //     {
+    //       id: "1",
+    //       name: "iPhone 15",
+    //       description: "Último modelo de iPhone con tecnología avanzada",
+    //       category: "Electrónicos",
+    //       image: "/placeholder.svg?height=200&width=200",
+    //       createdAt: new Date(),
+    //       updatedAt: new Date(),
+    //     },
+    //     {
+    //       id: "2",
+    //       name: "MacBook Pro",
+    //       description: "Laptop profesional para desarrollo y diseño",
+    //       category: "Computadoras",
+    //       image: "/placeholder.svg?height=200&width=200",
+    //       createdAt: new Date(),
+    //       updatedAt: new Date(),
+    //     },
+    //   ]
+    //   this.saveProducts(sampleProducts)
+    // }
   }
 
   private saveProducts(products: Product[]): void {

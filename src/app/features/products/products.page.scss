@@ -55,14 +55,19 @@ ion-fab {
     height: 45px;
   }
   .input-con-borde {
-  width: calc(100% - 20px);
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 8px 12px;
-  margin: 10px;
-  box-sizing: border-box;
-  height: 45px;
-  display: flex;
+    width: calc(100% - 20px);
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 10px;
+    box-sizing: border-box;
+    height: 45px;
+    display: flex;
   }
 }
 
+.empty-state{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

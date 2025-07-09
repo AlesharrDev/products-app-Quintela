@@ -21,9 +21,10 @@ import {
   ActionSheetController,
 } from "@ionic/angular/standalone"
 import { addIcons } from "ionicons"
-import { cameraOutline } from "ionicons/icons"
+import { camera, cameraOutline, close, image } from "ionicons/icons"
 import { ProductService } from "src/app/core/services/product.service"
 import { Product } from "src/app/core/models/product.model"
+import { Camera, CameraResultType, CameraSource } from "@capacitor/camera"
 
 
 @Component({
@@ -69,7 +70,7 @@ export class ProductFormPage implements OnInit {
   categories: string[] = []
 
   constructor() {
-    addIcons({ cameraOutline })
+    addIcons({ cameraOutline, camera, image, close })
   }
 
   ngOnInit() {
@@ -120,39 +121,48 @@ export class ProductFormPage implements OnInit {
 
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
-      header: "Seleccionar imagen",
+      header: "Seleccionar Imagen",
       buttons: [
         {
-          text: "Imagen de ejemplo 1",
+          text: "Tomar Foto",
+          icon: "camera",
           handler: () => {
-            this.product.image = "/placeholder.svg?height=200&width=200&text=Producto+1"
+            this.takePicture(CameraSource.Camera)
           },
         },
         {
-          text: "Imagen de ejemplo 2",
+          text: "Elegir de la Galería",
+          icon: "image",
           handler: () => {
-            this.product.image = "/placeholder.svg?height=200&width=200&text=Producto+2"
-          },
-        },
-        {
-          text: "Imagen de ejemplo 3",
-          handler: () => {
-            this.product.image = "/placeholder.svg?height=200&width=200&text=Producto+3"
-          },
-        },
-        {
-          text: "Sin imagen",
-          handler: () => {
-            this.product.image = ""
+            this.takePicture(CameraSource.Photos)
           },
         },
         {
           text: "Cancelar",
+          icon: "close",
           role: "cancel",
         },
       ],
     })
     await actionSheet.present()
+  }
+
+  async takePicture(source: CameraSource) {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: source,
+      })
+
+      if (image.dataUrl) {
+        this.product.image = image.dataUrl
+      }
+    } catch (error) {
+      console.error("Error al obtener la imagen", error)
+      this.showToast("No se pudo seleccionar la imagen.", "danger")
+    }
   }
 
   private async showToast(message: string, color: string) {
