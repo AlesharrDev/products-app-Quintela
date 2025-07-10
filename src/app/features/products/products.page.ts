@@ -150,13 +150,6 @@ export class ProductsPage implements OnInit {
       header: product.name,
       buttons: [
         {
-          text: 'Ver Detalles',
-          icon: 'eye-outline',
-          handler: () => {
-            this.viewProduct(product);
-          },
-        },
-        {
           text: 'Editar',
           icon: 'create-outline',
           handler: () => {
@@ -181,8 +174,8 @@ export class ProductsPage implements OnInit {
     await actionSheet.present();
   }
 
-  viewProduct(product: Product) {
-    console.log('Ver producto:', product);                            // Implementar vista de detalles si es necesario
+  viewProduct(product: Product):void {
+    // console.log('Ver producto:', product);                            // Implementar vista de detalles si es necesario
   }
 
   editProduct(product: Product) {

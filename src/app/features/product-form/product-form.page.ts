@@ -160,7 +160,7 @@ export class ProductFormPage implements OnInit {
         this.product.image = image.dataUrl
       }
     } catch (error) {
-      console.error("Error al obtener la imagen", error)
+      // console.error("Error al obtener la imagen", error)
       this.showToast("No se pudo seleccionar la imagen.", "danger")
     }
   }

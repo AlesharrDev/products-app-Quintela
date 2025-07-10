@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core"
 import { BehaviorSubject } from "rxjs"
 import type { Product } from "../models/product.model"
+import { CreateProductRequest } from "../models/createProductRecuest"
 
 @Injectable({
   providedIn: "root",
@@ -14,39 +15,15 @@ export class ProductService {
   constructor() {
     this.loadProducts()
   }
-
+//cargar los productos del localStorage
   private loadProducts(): void {
     const stored = localStorage.getItem(this.STORAGE_KEY)
     if (stored) {
       const products = JSON.parse(stored)
       this.productsSubject.next(products)
     } 
-    // else {
-    //   // Productos de ejemplo
-    //   const sampleProducts: Product[] = [
-    //     {
-    //       id: "1",
-    //       name: "iPhone 15",
-    //       description: "Último modelo de iPhone con tecnología avanzada",
-    //       category: "Electrónicos",
-    //       image: "/placeholder.svg?height=200&width=200",
-    //       createdAt: new Date(),
-    //       updatedAt: new Date(),
-    //     },
-    //     {
-    //       id: "2",
-    //       name: "MacBook Pro",
-    //       description: "Laptop profesional para desarrollo y diseño",
-    //       category: "Computadoras",
-    //       image: "/placeholder.svg?height=200&width=200",
-    //       createdAt: new Date(),
-    //       updatedAt: new Date(),
-    //     },
-    //   ]
-    //   this.saveProducts(sampleProducts)
-    // }
   }
-
+//guardar los productos en el localStorage
   private saveProducts(products: Product[]): void {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(products))
     this.productsSubject.next(products)
@@ -60,18 +37,17 @@ export class ProductService {
     return this.productsSubject.value.find((p) => p.id === id)
   }
 
-  addProduct(product: Omit<Product, "id" | "createdAt" | "updatedAt">): void {
+  addProduct(product: CreateProductRequest): void {
     const newProduct: Product = {
       ...product,
       id: Date.now().toString(),
       createdAt: new Date(),
       updatedAt: new Date(),
     }
-
     const products = [...this.productsSubject.value, newProduct]
     this.saveProducts(products)
   }
-
+  //Partial hace que la interfaz sea parcial, es decir, que no sea obligatorio que se pase todo el objeto
   updateProduct(id: string, updates: Partial<Product>): void {
     const products = this.productsSubject.value.map((p) =>
       p.id === id ? { ...p, ...updates, updatedAt: new Date() } : p,
