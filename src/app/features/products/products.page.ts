@@ -149,11 +149,26 @@ export class ProductsPage implements OnInit {
   addProduct() {
     this.router.navigate(['/product-form']);
   }
+  
+  editProduct(product: Product) {
+    this.router.navigate(['/product-form', product.id]);              
+  }
+
+  viewProduct(product:Product){
+    this.router.navigate(['/details',product.id]);
+  }
 
   async presentProductOptions(product: Product) {
     const actionSheet = await this.actionSheetController.create({
       header: product.name,
       buttons: [
+        {
+          text: 'Ver Detalles',
+          icon: 'eye-outline',
+          handler: () => {
+            this.viewProduct(product);
+          },
+        },
         {
           text: 'Editar',
           icon: 'create-outline',
@@ -180,9 +195,6 @@ export class ProductsPage implements OnInit {
   }
 
  
-  editProduct(product: Product) {
-    this.router.navigate(['/product-form', product.id]);              
-  }
 
   async confirmDelete(product: Product) {
     const alert = await this.alertController.create({
