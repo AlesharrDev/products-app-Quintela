@@ -106,6 +106,14 @@ export class ProductsPage implements OnInit {
     this.loadProducts();
   }
 
+  ionViewWillLeave() {
+    // Limpiar el foco al salir de la página para evitar problemas de accesibilidad
+    const activeElement = document.activeElement as HTMLElement;
+    if (activeElement) {
+      activeElement.blur();
+    }
+  }
+
   loadProducts() {
     this.productService.products$.subscribe((products) => {
       this.products = products;
@@ -142,7 +150,7 @@ export class ProductsPage implements OnInit {
   }
 
   addProduct() {
-    this.router.navigate(['/product-form']);                                //quiter el foco del boton despues del click
+    this.router.navigate(['/product-form']);
   }
 
   async presentProductOptions(product: Product) {
