@@ -36,6 +36,7 @@
       justify-content: center;
       border: 2px dashed var(--ion-color-medium);
       color: var(--ion-color-medium);
+      background: var(--ion-color-light-shade);
 
       ion-icon {
         font-size: 48px;
@@ -45,6 +46,14 @@
       p {
         margin: 0;
         font-size: 14px;
+        font-weight: 500;
+      }
+
+      .required-text {
+        margin-top: 8px;
+        color: var(--ion-color-danger);
+        font-size: 12px;
+        font-weight: 400;
       }
     }
   }
@@ -76,5 +85,15 @@
       font-weight: bold;
       margin-bottom: 15px;
     }
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+
+  .image-container .image-placeholder {
+    background: var(--ion-color-dark);
+    border-color: var(--ion-color-medium);
+    color: var(--ion-color-light);
   }
 }

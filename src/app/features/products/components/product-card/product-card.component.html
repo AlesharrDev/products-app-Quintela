@@ -1,8 +1,8 @@
 <ion-card *ngFor="let product of productslist" class="product-card" 
 (click)="presentProductOptions(product)"
 >
-  <div class="product-image-container" *ngIf="product.image">
-    <img [src]="product.image"/>
+  <div class="product-image-container">
+    <img [src]="product.image " [alt]="product.name"/>
   </div>
   <ion-card-content>
     <h2>{{product.name}}</h2>

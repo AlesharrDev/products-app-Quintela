@@ -60,14 +60,11 @@ import { ProductCardComponent } from "./components/product-card/product-card.com
     IonLabel,
     IonSelect,
     IonSelectOption,
-    // IonCard,
-    // IonCardContent,
-    // IonChip,
-    // IonFab,
-    // IonFabButton,
+    IonCard,
+    IonCardContent,
+    IonChip,
     NavbarComponent,
     FloatingActionButtonComponent,
-    ProductCardComponent
 ],
 })
 export class ProductsPage implements OnInit {

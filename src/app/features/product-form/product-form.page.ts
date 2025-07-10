@@ -96,7 +96,7 @@ export class ProductFormPage implements OnInit {
 
   async onSubmit() {
     if (!this.isFormValid()) {
-      this.showToast("Por favor, complete todos los campos requeridos", "warning")
+      this.showToast("Por favor, complete todos los campos requeridos incluyendo la imagen", "warning")
       return
     }
 
@@ -116,7 +116,7 @@ export class ProductFormPage implements OnInit {
   }
 
   isFormValid(): boolean {
-    return !!(this.product.name && this.product.description && this.product.category)
+    return !!(this.product.name && this.product.description && this.product.category && this.product.image)
   }
 
   async selectImage() {
