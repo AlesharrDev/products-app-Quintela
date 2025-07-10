@@ -182,12 +182,9 @@ export class ProductsPage implements OnInit {
     await actionSheet.present();
   }
 
-  viewProduct(product: Product):void {
-    // console.log('Ver producto:', product);                            // Implementar vista de detalles si es necesario
-  }
-
+ 
   editProduct(product: Product) {
-    this.router.navigate(['/product-form', product.id]);              //implementar la edicion de producto
+    this.router.navigate(['/product-form', product.id]);              
   }
 
   async confirmDelete(product: Product) {
