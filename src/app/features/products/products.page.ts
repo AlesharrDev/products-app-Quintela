@@ -163,7 +163,7 @@ export class ProductsPage implements OnInit {
       header: product.name,
       buttons: [
         {
-          text: 'Ver Detalles',
+          text: 'Ver producto',
           icon: 'eye-outline',
           handler: () => {
             this.viewProduct(product);

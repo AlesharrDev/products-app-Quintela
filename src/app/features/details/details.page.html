@@ -1,13 +1,65 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>details</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/products"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalles del Producto</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="container">
+    <div *ngIf="loading" class="loading">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Cargando producto...</p>
+    </div>
+
+    <div *ngIf="!loading && product" class="product-details">
+      <ion-card>
+        <img 
+          *ngIf="product.image" 
+          [src]="product.image" 
+          [alt]="product.name"
+          class="product-image"
+        />
+        <img 
+          *ngIf="!product.image" 
+          src="assets/icon/default-product.png" 
+          [alt]="product.name"
+          class="product-image"
+        />
+        
+        <ion-card-header>
+          <ion-card-title>{{ product.name }}</ion-card-title>
+          <ion-card-subtitle>
+            <ion-chip color="primary">
+              {{ product.category }}
+            </ion-chip>
+          </ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <h3>Descripción</h3>
+          <p>{{ product.description }}</p>
+          
+          <div class="product-info">
+            <p><strong>Creado:</strong> {{ product.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
+            <p><strong>Actualizado:</strong> {{ product.updatedAt | date:'dd/MM/yyyy HH:mm' }}</p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="!loading && !product" class="not-found">
+      <ion-card>
+        <ion-card-content>
+          <h2>Producto no encontrado</h2>
+          <p>El producto que buscas no existe o ha sido eliminado.</p>
+          <ion-button fill="outline" router-link="/products">
+            Volver a productos
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>
